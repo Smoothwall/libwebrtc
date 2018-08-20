@@ -14,7 +14,7 @@ if (WEBRTC_REVISION)
   libwebrtc_execute(
       COMMAND ${GIT_EXECUTABLE} checkout ${WEBRTC_REVISION}
       OUTPUT_VARIABLE _WEBRTC_CHECKOUT
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       STAMPFILE webrtc-checkout-commit
       STATUS "Checking out webrtc to commit ${WEBRTC_REVISION}"
       ERROR "Unable to checkout webrtc to commit ${WEBRTC_REVISION}"
@@ -23,7 +23,7 @@ elseif (WEBRTC_BRANCH_HEAD)
   libwebrtc_execute(
       COMMAND ${GIT_EXECUTABLE} config remote.origin.fetch +refs/branch-heads/*:refs/remotes/branch-heads/* ^\\+refs/branch-heads/\\*:.*$
       OUTPUT_VARIABLE _WEBRTC_CONFIG_FETCH
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       STAMPFILE webrtc-config-fetch
       STATUS "Setting up branch-heads refspecs"
       ERROR "Unable to add branch-heads refspec to the git config"
@@ -32,7 +32,7 @@ elseif (WEBRTC_BRANCH_HEAD)
   libwebrtc_execute(
       COMMAND ${GIT_EXECUTABLE} fetch origin ${WEBRTC_BRANCH_HEAD}
       OUTPUT_VARIABLE _WEBRTC_FETCH
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       STAMPFILE webrtc-fetch-branch-heads
       STATUS "Fetching ${WEBRTC_BRANCH_HEAD}"
       ERROR "Unable to fetch ${WEBRTC_BRANCH_HEAD}"
@@ -41,7 +41,7 @@ elseif (WEBRTC_BRANCH_HEAD)
   libwebrtc_execute(
       COMMAND ${GIT_EXECUTABLE} checkout FETCH_HEAD
       OUTPUT_VARIABLE _WEBRTC_CHECKOUT
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       STAMPFILE webrtc-checkout-branch-head
       STATUS "Checking out ${WEBRTC_BRANCH_HEAD}"
       ERROR "Unable to checkout ${WEBRTC_BRANCH_HEAD}"
@@ -139,7 +139,7 @@ include(Gn)
 libwebrtc_command(
     NAME webrtc-generate
     COMMAND ${_GEN_COMMAND}
-    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     COMMENT "Generating build files"
     DEPENDS ${_DEPENDENCIES}
 )
@@ -153,7 +153,7 @@ endif (BUILD_TESTS)
 libwebrtc_command(
     NAME webrtc-build
     COMMAND ${_NINJA_COMMAND}
-    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     COMMENT "Running ninja"
     DEPENDS webrtc-generate
 )

@@ -6,7 +6,7 @@ project(libwebrtc)
 cmake_policy(SET CMP0057 NEW)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-    ${CMAKE_SOURCE_DIR}/CMakeModules)
+    ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules)
 
 find_package(Git REQUIRED)
 
@@ -85,7 +85,7 @@ ExternalProject_Add(
     STAMP_DIR ${CMAKE_BINARY_DIR}/webrtc/stamp
     TMP_DIR ${CMAKE_BINARY_DIR}/webrtc/tmp
 
-    PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/webrtc/CMakeLists.txt.in ${CMAKE_BINARY_DIR}/webrtc/src/CMakeLists.txt
+    PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/webrtc/CMakeLists.txt.in ${CMAKE_BINARY_DIR}/webrtc/src/CMakeLists.txt
     UPDATE_COMMAND ""
     INSTALL_COMMAND ""
 
@@ -106,7 +106,7 @@ ExternalProject_Add(
     DEPENDS webrtc-src
 
     INSTALL_DIR ${CMAKE_BINARY_DIR}
-    SOURCE_DIR ${CMAKE_SOURCE_DIR}/libwebrtc
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libwebrtc
     BINARY_DIR ${CMAKE_BINARY_DIR}/libwebrtc
 
     CMAKE_ARGS
@@ -123,7 +123,7 @@ if (BUILD_SAMPLE)
   ExternalProject_Add(
       sample
       DEPENDS libwebrtc
-      SOURCE_DIR ${CMAKE_SOURCE_DIR}/sample
+      SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/sample
       INSTALL_COMMAND ""
 
       CMAKE_ARGS
