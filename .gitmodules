@@ -1,0 +1,3 @@
+[submodule "tools"]
+	path = tools
+	url = https://smoothwall.visualstudio.com/Smoothwall/_git/uc-tools
